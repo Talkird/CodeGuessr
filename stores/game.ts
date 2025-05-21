@@ -27,8 +27,8 @@ export const useGameStore = create<GameState>((set, get) => ({
   hasLost: false,
 
   generateAnswer: () => {
-    const digits = String(Math.floor(1000 + Math.random() * 9000));
-    set({ answer: digits });
+    const generatedAnswer = String(Math.floor(1000 + Math.random() * 9000));
+    set({ answer: generatedAnswer });
   },
 
   takeGuess: (guess: string) => {

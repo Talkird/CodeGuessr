@@ -10,7 +10,6 @@ interface ScoreEntry {
 interface RankingState {
   scores: ScoreEntry[];
   addEntry: (entry: ScoreEntry) => void;
-  resetRanking: () => void;
 }
 
 export const useRankingStore = create<RankingState>()(
@@ -19,7 +18,6 @@ export const useRankingStore = create<RankingState>()(
       scores: [],
       addEntry: (entry) =>
         set((state) => ({ scores: [...state.scores, entry] })),
-      resetRanking: () => set({ scores: [] }),
     }),
     {
       name: "ranking-storage",

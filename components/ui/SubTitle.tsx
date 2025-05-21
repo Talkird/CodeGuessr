@@ -6,7 +6,7 @@ interface SubTitleProps {
   style?: TextStyle;
 }
 
-export function SubTitle({ children, style }: SubTitleProps) {
+export  function SubTitle({ children, style }: SubTitleProps) {
   return <Text style={[styles.subtitle, style]}>{children}</Text>;
 }
 

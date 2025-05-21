@@ -32,6 +32,7 @@ export default function Layout() {
       screenOptions={{
         headerShown: false,
         contentStyle: { backgroundColor: "#f5f5f5" },
+        gestureEnabled: false,
       }}
     />
   );
