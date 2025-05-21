@@ -3,10 +3,12 @@ import { Column } from "@/components/ui/Column";
 import Input from "@/components/ui/Input";
 import { SmallText } from "@/components/ui/SmallText";
 import { Title } from "@/components/ui/Title";
+import { useGameStore } from "@/stores/game";
 import { usePlayerStore } from "@/stores/player";
 import { primary } from "@/utils/colors";
 import { Link, router } from "expo-router";
 import { useState } from "react";
+import { Alert } from "react-native";
 
 import {
   Dimensions,
@@ -20,13 +22,15 @@ const { width, height } = Dimensions.get("window");
 export default function Index() {
   const [name, setName] = useState("");
   const playerStore = usePlayerStore();
+  const gameStore = useGameStore();
 
   function handlePlayPress() {
     if (name.trim() === "") {
-      alert("Por favor, ingresa tu nombre");
+      Alert.alert("Error", "Por favor ingresa un nombre válido");
       return;
     }
     playerStore.setName(name);
+    gameStore.resetGame();
     router.push("/game");
   }
 
