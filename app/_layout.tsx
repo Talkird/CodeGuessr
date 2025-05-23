@@ -6,9 +6,25 @@ import {
 } from "@expo-google-fonts/outfit";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
+import { Platform, View } from "react-native";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
-SplashScreen.preventAutoHideAsync();
+function BottomInsetBackground() {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View
+      style={{
+        height: insets.bottom,
+        backgroundColor: "#513eb8",
+      }}
+    />
+  );
+}
 
 export default function Layout() {
   const [fontsLoaded] = useFonts({
@@ -17,23 +33,30 @@ export default function Layout() {
     Outfit_700Bold,
   });
 
+  // Prevent auto-hide safely once, inside a useEffect (important for web)
   useEffect(() => {
+    SplashScreen.preventAutoHideAsync().catch(() => {});
+  }, []);
+
+  // When fonts loaded, hide splash screen
+  const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
-      SplashScreen.hideAsync();
+      await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  if (!fontsLoaded) return null;
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: "#f5f5f5" },
-        gestureEnabled: false,
-      }}
-    />
+    <SafeAreaProvider onLayout={onLayoutRootView}>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: "#f0f0f0" },
+          gestureEnabled: false,
+        }}
+      />
+      {Platform.OS === "ios" && <BottomInsetBackground />}
+    </SafeAreaProvider>
   );
 }

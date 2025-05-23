@@ -21,7 +21,7 @@ interface GameState {
 
 export const useGameStore = create<GameState>((set, get) => ({
   answer: "",
-  attemptsLeft: 10,
+  attemptsLeft: 2,
   attempts: [],
   hasWon: false,
   hasLost: false,
@@ -86,7 +86,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     set({
       answer: "",
       attempts: [],
-      attemptsLeft: 10,
+      attemptsLeft: 2,
       hasWon: false,
       hasLost: false,
     });

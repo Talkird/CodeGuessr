@@ -1,4 +1,4 @@
-import { SubTitle } from "@/components/ui/SubTitle";
+import { SubTitle } from "@/components/SubTitle";
 import { primary } from "@/utils/colors";
 import React from "react";
 import { StyleSheet, Switch, View } from "react-native";

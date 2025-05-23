@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/Button";
-import { Column } from "@/components/ui/Column";
-import Input from "@/components/ui/Input";
-import { SmallText } from "@/components/ui/SmallText";
-import { SubTitle } from "@/components/ui/SubTitle";
-import { Title } from "@/components/ui/Title";
-import USwitch from "@/components/ui/USwitch";
+import { Button } from "@/components/Button";
+import { Column } from "@/components/Column";
+import Input from "@/components/Input";
+import { SmallText } from "@/components/SmallText";
+import { SubTitle } from "@/components/SubTitle";
+import { Title } from "@/components/Title";
+import USwitch from "@/components/USwitch";
 import { useGameStore } from "@/stores/game";
 import { usePlayerStore } from "@/stores/player";
 import { primary } from "@/utils/colors";
@@ -35,7 +35,7 @@ export default function Index() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ImageBackground
-        source={require("@/assets/backgrounds/scatter.png")}
+        source={require("@/assets/haikei/waves.png")}
         style={{ width: "100%", height: "100%" }}
       >
         <KeyboardAvoidingView style={{ flex: 1 }}>

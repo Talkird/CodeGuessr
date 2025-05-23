@@ -1,17 +1,20 @@
-import { Column } from "@/components/ui/Column";
-import { Title } from "@/components/ui/Title";
+import { Button } from "@/components/Button";
+import { Column } from "@/components/Column";
+import { ScoreTable } from "@/components/ScoreTable";
+import { Title } from "@/components/Title";
+import { useRankingStore } from "@/stores/ranking";
 import { primary } from "@/utils/colors";
-import { useState } from "react";
-
-import { Dimensions, ImageBackground } from "react-native";
-const { width, height } = Dimensions.get("window");
-
+import { useRouter } from "expo-router";
+import { ImageBackground } from "react-native";
 
 export default function Index() {
+  const rankingStore = useRankingStore();
+  const rankings = rankingStore.scores;
+  const router = useRouter();
   return (
     <ImageBackground
-      source={require("@/assets/backgrounds/scatter.png")}
-      style={{ width, height }}
+      source={require("@/assets/haikei/waves.png")}
+      style={{ width: "100%", height: "100%" }}
     >
       <Column
         style={{
@@ -21,7 +24,17 @@ export default function Index() {
           gap: 32,
         }}
       >
-        <Title style={{ color: primary }}>Ranking</Title>
+        <Title style={{ color: primary }}>Ranking 🏆</Title>
+        <Column>
+          <ScoreTable />
+        </Column>
+        <Button
+          onPress={() => {
+            router.push("/");
+          }}
+        >
+          Volver al menú
+        </Button>
       </Column>
     </ImageBackground>
   );
