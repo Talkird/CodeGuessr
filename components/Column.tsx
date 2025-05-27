@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ViewStyle, StyleSheet, ViewProps } from "react-native";
+import { StyleSheet, View, ViewProps, ViewStyle } from "react-native";
 
 interface ColumnProps extends ViewProps {
   children: React.ReactNode;
@@ -16,6 +16,7 @@ export function Column({ children, style, ...rest }: ColumnProps) {
 
 const styles = StyleSheet.create({
   column: {
+    width: "100%",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",

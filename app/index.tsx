@@ -54,7 +54,7 @@ export default function Index() {
             <Column>
               <Title style={{ color: primary }}>CodeGuessr</Title>
               <SubTitle style={{ opacity: 0.5 }}>
-                Adivina el número para ganar!
+                Adiviná el número para ganar!
               </SubTitle>
             </Column>
             <Column style={{ gap: 16 }}>
@@ -66,7 +66,7 @@ export default function Index() {
               <USwitch
                 value={repeatedDigits}
                 onValueChange={setRepeatedDigits}
-                text="Digítos repetidos"
+                text="Dígitos repetidos"
               />
             </Column>
             <Column style={{ gap: 8 }}>

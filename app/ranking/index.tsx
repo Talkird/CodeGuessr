@@ -1,6 +1,7 @@
 import { Button } from "@/components/Button";
 import { Column } from "@/components/Column";
 import { ScoreTable } from "@/components/ScoreTable";
+import { SubTitle } from "@/components/SubTitle";
 import { Title } from "@/components/Title";
 import { useRankingStore } from "@/stores/ranking";
 import { primary } from "@/utils/colors";
@@ -26,8 +27,15 @@ export default function Index() {
         }}
       >
         <Title style={{ color: primary }}>Ranking 🏆</Title>
-        <Column>
-          <ScoreTable scores={rankings} />
+        <Column style={{}}>
+          {rankings.length === 0 && (
+            <SubTitle
+              style={{ opacity: 0.5, width: "75%", textAlign: "center" }}
+            >
+              Aún no hay puntuaciones , ¡convertite en el mejor!
+            </SubTitle>
+          )}
+          {rankings.length > 0 && <ScoreTable scores={rankings} />}
         </Column>
         <Button
           onPress={() => {

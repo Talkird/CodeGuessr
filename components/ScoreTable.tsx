@@ -19,7 +19,7 @@ export function ScoreTable({ scores }: ScoreTableProps) {
   const topScores = (scores || [])
     .slice()
     .sort((a, b) => b.score - a.score)
-    .slice(0, 8);
+    .slice(0, 5);
 
   return (
     <Row style={{ gap: 32 }}>
