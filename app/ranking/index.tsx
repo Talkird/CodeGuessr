@@ -11,6 +11,7 @@ export default function Index() {
   const rankingStore = useRankingStore();
   const rankings = rankingStore.scores;
   const router = useRouter();
+
   return (
     <ImageBackground
       source={require("@/assets/haikei/waves.png")}
@@ -26,11 +27,11 @@ export default function Index() {
       >
         <Title style={{ color: primary }}>Ranking 🏆</Title>
         <Column>
-          <ScoreTable />
+          <ScoreTable scores={rankings} />
         </Column>
         <Button
           onPress={() => {
-            router.push("/");
+            router.replace("/");
           }}
         >
           Volver al menú

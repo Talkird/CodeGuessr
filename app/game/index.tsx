@@ -8,7 +8,7 @@ import { Title } from "@/components/Title";
 import { useGameStore } from "@/stores/game";
 import { usePlayerStore } from "@/stores/player";
 import { primary } from "@/utils/colors";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ImageBackground,
@@ -23,6 +23,7 @@ export default function Index() {
   const [guess, setGuess] = useState("");
   const gameStore = useGameStore();
   const playerStore = usePlayerStore();
+  const router = useRouter();
 
   useEffect(() => {
     gameStore.generateAnswer();
@@ -170,7 +171,7 @@ export default function Index() {
                     Jugar de nuevo
                   </Button>
                 )}
-                <Link href="/">
+                <Link replace href="/">
                   <SmallText
                     style={{ color: primary, textDecorationLine: "underline" }}
                   >

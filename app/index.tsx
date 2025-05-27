@@ -8,7 +8,7 @@ import USwitch from "@/components/USwitch";
 import { useGameStore } from "@/stores/game";
 import { usePlayerStore } from "@/stores/player";
 import { primary } from "@/utils/colors";
-import { Link, router } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import {
   ImageBackground,
@@ -21,6 +21,7 @@ export default function Index() {
   const [repeatedDigits, setRepeatedDigits] = useState(false);
   const playerStore = usePlayerStore();
   const gameStore = useGameStore();
+  const router = useRouter();
 
   function handlePlayPress() {
     if (name.trim() === "") {
@@ -28,8 +29,10 @@ export default function Index() {
     } else {
       playerStore.setName(name);
     }
+
+    gameStore.setRepeatedDigits(repeatedDigits);
     gameStore.resetGame();
-    router.push("/game");
+    router.replace("/game");
   }
 
   return (
@@ -68,7 +71,7 @@ export default function Index() {
             </Column>
             <Column style={{ gap: 8 }}>
               <Button onPress={handlePlayPress}>Jugar ahora</Button>
-              <Link href="/ranking">
+              <Link replace href="/ranking">
                 <SmallText
                   style={{ color: primary, textDecorationLine: "underline" }}
                 >

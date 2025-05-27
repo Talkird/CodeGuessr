@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { usePlayerStore } from "./player";
+import { useRankingStore } from "./ranking";
 
 interface Attempt {
   guess: string;
@@ -13,6 +15,8 @@ interface GameState {
   attempts: Attempt[];
   hasWon: boolean;
   hasLost: boolean;
+  repeatedDigits: boolean;
+  setRepeatedDigits: (value: boolean) => void;
 
   generateAnswer: () => void;
   takeGuess: (guess: string) => void;
@@ -21,20 +25,40 @@ interface GameState {
 
 export const useGameStore = create<GameState>((set, get) => ({
   answer: "",
-  attemptsLeft: 2,
+  attemptsLeft: 10,
   attempts: [],
   hasWon: false,
   hasLost: false,
+  repeatedDigits: false,
+
+  setRepeatedDigits: (value) => set({ repeatedDigits: value }),
 
   generateAnswer: () => {
-    const generatedAnswer = String(Math.floor(1000 + Math.random() * 9000));
+    let generatedAnswer = "";
+    if (get().repeatedDigits) {
+      // Digitos repetidos
+      generatedAnswer = "";
+      for (let i = 0; i < 4; i++) {
+        generatedAnswer += Math.floor(Math.random() * 10).toString();
+      }
+    } else {
+      // No repetidos
+      const digits: number[] = [];
+      while (digits.length < 4) {
+        const digit = Math.floor(Math.random() * 10);
+        if (digits.length === 0 && digit === 0) continue; // No leading zero
+        if (!digits.includes(digit)) digits.push(digit);
+      }
+      generatedAnswer = digits.join("");
+    }
     set({ answer: generatedAnswer });
   },
 
   takeGuess: (guess: string) => {
     const { answer, attemptsLeft, attempts } = get();
-
     if (attemptsLeft <= 0) return;
+
+    console.log(answer);
 
     const answerArr = answer.split("");
     const guessArr = guess.split("");
@@ -65,28 +89,29 @@ export const useGameStore = create<GameState>((set, get) => ({
     const newAttemptsLeft = attemptsLeft - 1;
     const hasLost = !hasWon && newAttemptsLeft === 0;
 
-    console.log("Answer:", answer);
-    console.log("Guess:", guess);
-    console.log("Correct:", correct);
-    console.log("Partial:", partial);
-    console.log("Incorrect:", incorrect);
-    console.log("Won:", hasWon);
-    console.log("Lost:", hasLost);
-    console.log("Attempts:", attemptsLeft);
-
     set({
       attempts: [...attempts, { guess, correct, partial, incorrect }],
       attemptsLeft: newAttemptsLeft,
       hasWon,
       hasLost,
     });
+
+    if (hasWon || hasLost) {
+      let score = 0;
+      if (hasWon) {
+        score = Math.max(0, 1000 - attempts.length * 100);
+      }
+
+      const player = usePlayerStore.getState().name;
+      useRankingStore.getState().addEntry({ player, score });
+    }
   },
 
   resetGame: () => {
     set({
       answer: "",
       attempts: [],
-      attemptsLeft: 2,
+      attemptsLeft: 10,
       hasWon: false,
       hasLost: false,
     });

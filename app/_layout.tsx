@@ -33,12 +33,10 @@ export default function Layout() {
     Outfit_700Bold,
   });
 
-  // Prevent auto-hide safely once, inside a useEffect (important for web)
   useEffect(() => {
     SplashScreen.preventAutoHideAsync().catch(() => {});
   }, []);
 
-  // When fonts loaded, hide splash screen
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
