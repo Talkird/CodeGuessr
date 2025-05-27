@@ -21,7 +21,6 @@ export async function playBackgroundMusic(musicAsset: any, isLooping = true) {
   backgroundMusic = sound;
   await sound.playAsync();
 }
-
 export async function stopBackgroundMusic() {
   if (backgroundMusic) {
     await backgroundMusic.stopAsync();
