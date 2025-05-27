@@ -8,6 +8,7 @@ import { Title } from "@/components/Title";
 import { useGameStore } from "@/stores/game";
 import { usePlayerStore } from "@/stores/player";
 import { primary } from "@/utils/colors";
+import { playLoseEffect, playWinEffect } from "@/utils/sound";
 import { Link, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
@@ -28,6 +29,11 @@ export default function Index() {
   useEffect(() => {
     gameStore.generateAnswer();
   }, []);
+
+  useEffect(() => {
+    if (gameStore.hasWon) playWinEffect();
+    if (gameStore.hasLost) playLoseEffect();
+  }, [gameStore.hasWon, gameStore.hasLost]);
 
   function handleGuess() {
     if (guess.length !== 4) {
@@ -76,7 +82,7 @@ export default function Index() {
             >
               <Column>
                 <Title style={{ color: primary }}>
-                  Hola, {playerStore.name}
+                  Hola, {playerStore.name} {gameStore.answer}
                 </Title>
                 <SubTitle style={{ opacity: 0.5 }}>
                   Intentos restantes: {gameStore.attemptsLeft}

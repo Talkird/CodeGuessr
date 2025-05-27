@@ -96,12 +96,8 @@ export const useGameStore = create<GameState>((set, get) => ({
       hasLost,
     });
 
-    if (hasWon || hasLost) {
-      let score = 0;
-      if (hasWon) {
-        score = Math.max(0, 1000 - attempts.length * 100);
-      }
-
+    if (hasWon) {
+      const score = Math.max(0, 1000 - attempts.length * 100);
       const player = usePlayerStore.getState().name;
       useRankingStore.getState().addEntry({ player, score });
     }

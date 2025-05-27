@@ -16,19 +16,22 @@ interface ScoreTableProps {
 }
 
 export function ScoreTable({ scores }: ScoreTableProps) {
-  const sortedScores = (scores || []).slice().sort((a, b) => b.score - a.score);
+  const topScores = (scores || [])
+    .slice()
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8);
 
   return (
     <Row style={{ gap: 32 }}>
       <Column style={styles.column}>
         <SubTitle style={styles.header}>Jugador</SubTitle>
-        {sortedScores.map((entry, idx) => (
+        {topScores.map((entry, idx) => (
           <SmallText key={entry.player + idx}>{entry.player}</SmallText>
         ))}
       </Column>
       <Column style={styles.column}>
         <SubTitle style={styles.header}>Puntos</SubTitle>
-        {sortedScores.map((entry, idx) => (
+        {topScores.map((entry, idx) => (
           <SmallText key={entry.player + idx}>{entry.score}</SmallText>
         ))}
       </Column>

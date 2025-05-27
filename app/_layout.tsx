@@ -1,3 +1,5 @@
+import menuMusic from "@/assets/music/menu.mp3";
+import { playBackgroundMusic, stopBackgroundMusic } from "@/utils/sound";
 import {
   Outfit_400Regular,
   Outfit_500Medium,
@@ -35,6 +37,10 @@ export default function Layout() {
 
   useEffect(() => {
     SplashScreen.preventAutoHideAsync().catch(() => {});
+    playBackgroundMusic(menuMusic);
+    return () => {
+      stopBackgroundMusic();
+    };
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
