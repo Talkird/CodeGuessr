@@ -8,7 +8,7 @@ import { primary } from "@/utils/colors";
 import { useRouter } from "expo-router";
 import { ImageBackground } from "react-native";
 
-export default function Index() {
+export default function Ranking() {
   const rankingStore = useRankingStore();
   const rankings = rankingStore.scores;
   const router = useRouter();

@@ -27,7 +27,7 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 
-export default function Index() {
+export default function Game() {
   const [guess, setGuess] = useState("");
   const gameStore = useGameStore();
   const playerStore = usePlayerStore();
