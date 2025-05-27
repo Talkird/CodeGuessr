@@ -42,6 +42,12 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
+    if (gameStore.answer) {
+      console.log("Respuesta generada:", gameStore.answer);
+    }
+  }, [gameStore.answer]);
+
+  useEffect(() => {
     if (gameStore.hasWon) playWinEffect();
     if (gameStore.hasLost) playLoseEffect();
   }, [gameStore.hasWon, gameStore.hasLost]);

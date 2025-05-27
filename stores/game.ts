@@ -58,8 +58,6 @@ export const useGameStore = create<GameState>((set, get) => ({
     const { answer, attemptsLeft, attempts } = get();
     if (attemptsLeft <= 0) return;
 
-    console.log(answer);
-
     const answerArr = answer.split("");
     const guessArr = guess.split("");
 

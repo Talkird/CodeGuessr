@@ -16,7 +16,6 @@ export function Column({ children, style, ...rest }: ColumnProps) {
 
 const styles = StyleSheet.create({
   column: {
-    width: "100%",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
