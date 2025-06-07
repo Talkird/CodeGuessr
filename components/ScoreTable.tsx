@@ -9,6 +9,7 @@ import { SmallText } from "./SmallText";
 interface WinEntry {
   player: string;
   wins: number;
+  losses: number;
 }
 
 interface ScoreTableProps {
@@ -34,6 +35,12 @@ export function ScoreTable({ scores }: ScoreTableProps) {
         <SubTitle style={styles.header}>Victorias</SubTitle>
         {topScores.map((entry, idx) => (
           <SmallText key={entry.player + idx}>{entry.wins}</SmallText>
+        ))}
+      </Column>
+      <Column style={styles.column}>
+        <SubTitle style={styles.header}>Derrotas</SubTitle>
+        {topScores.map((entry, idx) => (
+          <SmallText key={entry.player + idx}>{entry.losses ?? 0}</SmallText>
         ))}
       </Column>
     </Row>

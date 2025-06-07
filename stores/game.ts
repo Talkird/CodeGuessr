@@ -97,6 +97,9 @@ export const useGameStore = create<GameState>((set, get) => ({
     if (hasWon) {
       const player = usePlayerStore.getState().name;
       useRankingStore.getState().addEntry(player);
+    } else if (hasLost) {
+      const player = usePlayerStore.getState().name;
+      useRankingStore.getState().addLoss(player);
     }
   },
 
