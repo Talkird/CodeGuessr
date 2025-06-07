@@ -32,11 +32,18 @@ export default function Ranking() {
             <SubTitle
               style={{ opacity: 0.5, width: "75%", textAlign: "center" }}
             >
-              Aún no hay puntuaciones , ¡convertite en el mejor!
+              Aún no hay victorias, ¡convertite en el mejor!
             </SubTitle>
           )}
           {rankings.length > 0 && <ScoreTable scores={rankings} />}
         </Column>
+        <Button
+          onPress={() => {
+            rankingStore.reset();
+          }}
+        >
+          Resetear ranking
+        </Button>
         <Button
           onPress={() => {
             router.replace("/");

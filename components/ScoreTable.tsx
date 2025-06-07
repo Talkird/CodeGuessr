@@ -6,19 +6,20 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { SmallText } from "./SmallText";
 
-interface ScoreEntry {
+interface WinEntry {
   player: string;
-  score: number;
+  wins: number;
 }
 
 interface ScoreTableProps {
-  scores?: ScoreEntry[];
+  scores?: WinEntry[];
 }
 
 export function ScoreTable({ scores }: ScoreTableProps) {
   const topScores = (scores || [])
+    .filter((entry) => typeof entry.wins === "number" && !isNaN(entry.wins))
     .slice()
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => b.wins - a.wins)
     .slice(0, 5);
 
   return (
@@ -30,9 +31,9 @@ export function ScoreTable({ scores }: ScoreTableProps) {
         ))}
       </Column>
       <Column style={styles.column}>
-        <SubTitle style={styles.header}>Puntos</SubTitle>
+        <SubTitle style={styles.header}>Victorias</SubTitle>
         {topScores.map((entry, idx) => (
-          <SmallText key={entry.player + idx}>{entry.score}</SmallText>
+          <SmallText key={entry.player + idx}>{entry.wins}</SmallText>
         ))}
       </Column>
     </Row>
